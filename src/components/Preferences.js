@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Preferences = ({ handlePreferences }) => {
+const Preferences = ({
+  handlePreferences,
+  selectedSource,
+  setSelectedSource,
+}) => {
   const [sources, setSources] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedSource, setSelectedSource] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-
+  console.log(selectedSource, "selectedSourcessssssss");
   // useEffect(() => {
   //   // Fetch sources and categories when the component mounts
   //   const fetchSourcesAndCategories = async () => {

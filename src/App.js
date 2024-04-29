@@ -4,14 +4,21 @@ import SearchBar from "./components/SearchBar";
 import Preferences from "./components/Preferences";
 import ArticleList from "./components/ArticleList";
 import { getNewsFromApi } from "./api/newsApi";
+import SourceDropDown from "./components/SourceDropDown";
+import CategoriesDropDown from "./components/CategoriesDropDown";
+import DateFilter from "./components/DateFilter";
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const [selectedarticleSource, setSelectedArticleSource] = useState("");
+  const [selectedArticleCategory, setSelectedArticleCategory] = useState("");
+  const [selectedArticleDate, setSelectedArticleDate] = useState("");
   const [storedArticles, setStoredArticles] = useState([]);
   const [query, setQuery] = useState("");
   const [source, setSource] = useState("");
   const [filter, setFilter] = useState("");
   const [preferences, setPreferences] = useState({ source: "", category: "" });
+  const [selectedSource, setSelectedSource] = useState("newsAPI");
 
   useEffect(() => {
     async function getNews() {
@@ -53,7 +60,9 @@ function App() {
 
   const handlePreferences = async (preference) => {
     if (preference.type === "source") {
-      const news = await getNewsFromApi(null, null, preference.value);
+      console.log("log");
+      const news = await getNewsFromApi(null, null, preference.value, null,selectedArticleCategory);
+      console.log(news, "nynews");
       setArticles(news);
       setStoredArticles(news);
       setSource(preference.value);
@@ -80,7 +89,37 @@ function App() {
     <div className="App">
       <h1>News Aggregator</h1>
       <SearchBar handleSearch={handleSearch} handleFilter={handleFilter} />
-      <Preferences handlePreferences={handlePreferences} />
+      <SourceDropDown
+        articles={articles}
+        setArticles={setArticles}
+        storedArticles={storedArticles}
+        selectedarticleSource={selectedarticleSource}
+        setSelectedArticleSource={setSelectedArticleSource}
+        selectedSource={selectedSource}
+      />
+      <CategoriesDropDown
+        articles={articles}
+        setArticles={setArticles}
+        storedArticles={storedArticles}
+        setStoredArticles={setStoredArticles}
+        selectedArticleCategory={selectedArticleCategory}
+        setSelectedArticleCategory={setSelectedArticleCategory}
+        selectedSource={selectedSource}
+      />
+        <DateFilter
+        articles={articles}
+        setArticles={setArticles}
+        storedArticles={storedArticles}
+        setStoredArticles={setStoredArticles}
+        selectedArticleDate={selectedArticleDate}
+        setSelectedArticleDate={setSelectedArticleDate}
+        selectedSource={selectedSource}
+      />
+      <Preferences
+        handlePreferences={handlePreferences}
+        selectedSource={selectedSource}
+        setSelectedSource={setSelectedSource}
+      />
       <ArticleList articles={articles} />
     </div>
   );

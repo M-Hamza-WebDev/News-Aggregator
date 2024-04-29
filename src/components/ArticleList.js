@@ -1,6 +1,7 @@
 import React from "react";
 
 const ArticleList = ({ articles }) => {
+  console.log(articles,"dsds");
   return (
     <div>
       {articles.map((_article, index) => {
