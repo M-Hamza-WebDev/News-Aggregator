@@ -63,7 +63,7 @@ export const getNewsFromApi = async (
           source: { name: _news.byline || "No Source" },
           category: { name: _news.section || "No Category" },
           publishedAt: _news.published_date || "No Date",
-          urlToImage: _news?.multimedia[0]?.url || "",
+          urlToImage:  "",
         };
       });
       console.log({ nytimesFormated: nytimesNewsData });
