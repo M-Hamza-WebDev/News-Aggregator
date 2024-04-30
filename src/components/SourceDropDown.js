@@ -114,7 +114,7 @@ const SourceDropDown = ({
 
   return (
     <div>
-      <label htmlFor="source">Article Source:</label>
+      <label className="text-2xl" htmlFor="source">Article Source:</label>
       <select
         id="source"
         value={selectedarticleSource}

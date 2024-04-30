@@ -45,6 +45,7 @@ export const getNewsFromApi = async (
           source: { name: _news.source_id },
           category: { name: _news.category[0] },
           publishedAt: _news.pubDate,
+          urlToImage: _news.image_url,
         };
       });
       console.log({ theGuardianFormated: theGuardianNewsData });
@@ -62,6 +63,7 @@ export const getNewsFromApi = async (
           source: { name: _news.byline },
           category: { name: _news.section },
           publishedAt: _news.published_date,
+          urlToImage: _news.multimedia[0].url,
         };
       });
       console.log({ nytimesFormated: nytimesNewsData });

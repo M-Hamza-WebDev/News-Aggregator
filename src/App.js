@@ -86,7 +86,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App xl:mx-auto xl:container w-full 2xl:max-w-[1184px] 2xl:px-0 lg:px-8 md:px-6 px-4">
       <h1>News Aggregator</h1>
       <SearchBar handleSearch={handleSearch} handleFilter={handleFilter} />
       <SourceDropDown
