@@ -57,8 +57,8 @@ const Preferences = ({
         >
           <option value="">Select Source</option>
           <option value="newsAPI">News API</option>
-          <option value="theGuardian">The Guardian</option>
           <option value="nytimes">New York Times</option>
+          <option value="theGuardian">The Guardian</option>
         </select>
       </div>
       <div>
