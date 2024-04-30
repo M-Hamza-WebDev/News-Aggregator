@@ -38,14 +38,14 @@ export const getNewsFromApi = async (
       console.log({ theGuardian: response });
       const theGuardianNewsData = response.data.results.map((_news) => {
         return {
-          title: _news.title,
-          description: _news.description,
-          url: _news.link,
-          type: _news.category[0],
-          source: { name: _news.source_id },
-          category: { name: _news.category[0] },
-          publishedAt: _news.pubDate,
-          urlToImage: _news.image_url,
+          title: _news.title || "No Title by API to show",
+          description: _news.description || "",
+          url: _news.link || "",
+          type: _news.category[0] || "No Type",
+          source: { name: _news.source_id || "No Source" },
+          category: { name: _news.category[0] || "No Category" },
+          publishedAt: _news.pubDate || "No Date",
+          urlToImage: _news.image_url || "",
         };
       });
       console.log({ theGuardianFormated: theGuardianNewsData });
@@ -56,14 +56,14 @@ export const getNewsFromApi = async (
       console.log({ nytimes: response });
       const nytimesNewsData = response.data.results.map((_news) => {
         return {
-          title: _news.title,
-          description: _news.abstract,
-          url: _news.url,
-          type: _news.section,
-          source: { name: _news.byline },
-          category: { name: _news.section },
-          publishedAt: _news.published_date,
-          urlToImage: _news.multimedia[0].url,
+          title: _news.title || "No Title by API to show",
+          description: _news.abstract || "",
+          url: _news.url || "",
+          type: _news.section || "No Type",
+          source: { name: _news.byline || "No Source" },
+          category: { name: _news.section || "No Category" },
+          publishedAt: _news.published_date || "No Date",
+          urlToImage: _news?.multimedia[0]?.url || "",
         };
       });
       console.log({ nytimesFormated: nytimesNewsData });
