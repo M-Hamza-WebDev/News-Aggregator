@@ -1,56 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { getNewsFromApi } from "../api/newsApi";
-
-// const SourceDropDown = ({
-//   articles,
-//   setArticles,
-//   storedArticles,
-//   selectedarticleSource,
-//   setSelectedArticleSource,
-// }) => {
-//   useEffect(() => {
-//     //   setArticles(news);
-//     //   setStoredArticles(news);
-//   }, []);
-
-//   const handleSourceChange = (event) => {
-//     setSelectedArticleSource(event.target.value);
-//     // articles.filter((i) => i.includes(selectedarticleSource));
-
-//     console.log(articles, "articles");
-//     setArticles(
-//       articles.filter((source) => {
-//         // Perform a case-insensitive search by converting both source and selectedarticleSource to lowercase
-//         return source?.source?.name?.includes(event.target.value);
-//       })
-//     );
-
-//     // async function getNews() {
-//     //   console.log("124");
-//     // }
-//     // getNews();
-//   };
-
-//   return (
-//     <div>
-//       <label htmlFor="source">Article Source:</label>
-//       <select
-//         id="source"
-//         value={selectedarticleSource}
-//         onChange={handleSourceChange}
-//       >
-//         <option value="">Select a source</option>
-//         {articles.map((article) => (
-//           <option key={article?.id} value={article?.id}>
-//             {article?.source?.name}
-//           </option>
-//         ))}
-//       </select>
-//     </div>
-//   );
-// };
-
-// export default SourceDropDown;
 import React, { useEffect, useState } from "react";
 import { getNewsFromApi } from "../api/newsApi";
 
@@ -113,7 +60,7 @@ const SourceDropDown = ({
   };
 
   return (
-    <div className="w-fit">
+    <div className="sm:max-w-[227px] max-w-[343px] w-full mx-auto">
       <label
         className="block text-sm font-medium text-gray-700"
         htmlFor="source"
@@ -125,7 +72,7 @@ const SourceDropDown = ({
           id="source"
           value={selectedarticleSource}
           onChange={handleSourceChange}
-          className="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          className="block appearance-none w-full text-center bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
         >
           <option value="">Select a source</option>
           {/* Render dropdown options based on original sources */}
@@ -136,20 +83,17 @@ const SourceDropDown = ({
           ))}
         </select>
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-        <svg
-  className="fill-current h-4 w-4"
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 20 20"
->
-  <path
-    fillRule="evenodd"
-    d="M5.293 7.293a1 1 0 011.414 0l3.293 3.293 3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-    clipRule="evenodd"
-  />
-</svg>
-
-
-
+          <svg
+            className="fill-current h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0l3.293 3.293 3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
       </div>
     </div>

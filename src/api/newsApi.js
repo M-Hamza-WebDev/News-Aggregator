@@ -14,7 +14,8 @@ export const getNewsFromApi = async (
   filter,
   source,
   selectedarticleSource,
-  selectedArticleCategory
+  selectedArticleCategory,
+  
 ) => {
   try {
     console.log(selectedarticleSource, "selectedarticleSource");
@@ -34,6 +35,7 @@ export const getNewsFromApi = async (
     }
 
     const response = await axios.get(url);
+    
     if (source === "theGuardian") {
       console.log({ theGuardian: response });
       const theGuardianNewsData = response.data.results.map((_news) => {
@@ -54,7 +56,7 @@ export const getNewsFromApi = async (
 
     if (source === "nytimes") {
       console.log({ nytimes: response });
-      const nytimesNewsData = response.data.results.map((_news) => {
+      const nytimesNewsData = response?.data?.results?.map((_news) => {
         return {
           title: _news.title || "No Title by API to show",
           description: _news.abstract || "",
@@ -63,7 +65,9 @@ export const getNewsFromApi = async (
           source: { name: _news.byline || "No Source" },
           category: { name: _news.section || "No Category" },
           publishedAt: _news.published_date || "No Date",
-          urlToImage:  "",
+          urlToImage: _news?.multimedia
+            ? _news?.multimedia[0]?.url
+            : "",
         };
       });
       console.log({ nytimesFormated: nytimesNewsData });

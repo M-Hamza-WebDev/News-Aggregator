@@ -1,80 +1,51 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 const Preferences = ({
   handlePreferences,
   selectedSource,
   setSelectedSource,
 }) => {
-  const [sources, setSources] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  console.log(selectedSource, "selectedSourcessssssss");
-  // useEffect(() => {
-  //   // Fetch sources and categories when the component mounts
-  //   const fetchSourcesAndCategories = async () => {
-  //     const sourcesResponse = await axios.get(
-  //       "https://newsapi.org/v2/sources?apiKey=2babd3a1b3624291b69ed99e80d1d819"
-  //     );
-  //     const categoriesResponse = await axios.get(
-  //       "https://newsapi.org/v2/top-headlines/sources?apiKey=2babd3a1b3624291b69ed99e80d1d819"
-  //     );
-
-  //     setSources(sourcesResponse.data.sources);
-  //     // Extract unique categories from sources
-  //     const uniqueCategories = [
-  //       ...new Set(
-  //         sourcesResponse.data.sources.map((source) => source.category)
-  //       ),
-  //     ];
-  //     setCategories(uniqueCategories);
-  //   };
-
-  //   fetchSourcesAndCategories();
-  // }, []);
-
   const handleSourceChange = (e) => {
     const selectedSource = e.target.value;
     setSelectedSource(selectedSource);
     handlePreferences({ type: "source", value: selectedSource });
   };
 
-  const handleCategoryChange = (e) => {
-    const selectedCategory = e.target.value;
-    setSelectedCategory(selectedCategory);
-    handlePreferences({ type: "category", value: selectedCategory });
-  };
-
   return (
     <div>
-      <h2>Preferences</h2>
-      <div>
-        <label htmlFor="source">Source:</label>
-        <select
-          id="source"
-          onChange={handleSourceChange}
-          value={selectedSource}
+      <div className="sm:max-w-[227px] max-w-[343px] w-full mx-auto">
+        <label
+          className="block text-sm font-medium text-gray-700"
+          htmlFor="source"
         >
-          <option value="">Select Source</option>
-          <option value="newsAPI">News API</option>
-          <option value="nytimes">New York Times</option>
-          <option value="theGuardian">News Data</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="category">Category:</label>
-        <select
-          id="category"
-          onChange={handleCategoryChange}
-          value={selectedCategory}
-        >
-          <option value="">Select Category</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+          Prefered API source:
+        </label>
+        <div className="mt-1 relative">
+          <select
+            id="source"
+            onChange={handleSourceChange}
+            value={selectedSource}
+            className="block appearance-none w-full text-center bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
+          >
+            <option value="">Select Source</option>
+            <option value="newsAPI">News API</option>
+            <option value="nytimes">New York Times</option>
+            <option value="theGuardian">News Data</option>
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg
+              className="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0l3.293 3.293 3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   );
