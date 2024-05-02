@@ -22,15 +22,8 @@ const CategoriesDropDown = ({
   ];
 
   useEffect(() => {
-    if (selectedSource == "newsAPI") {
-      console.log(selectedSource, "abb");
-      const categories = newsApiCategories.map((article) => article);
-      // Remove duplicates and set original categories
-      const uniqueSources = Array.from(
-        new Set(categories.map((category) => category.name))
-      ).map((name) => categories.find((category) => category.name === name));
-      console.log(uniqueSources, "uniqueSources");
-      setOriginalCategories(uniqueSources);
+    if (selectedSource === "newsAPI") {
+      setOriginalCategories(newsApiCategories);
     } else {
       // Fetch news articles from API
       getNewsFromApi(null, null, selectedSource, null, null)
@@ -50,14 +43,14 @@ const CategoriesDropDown = ({
     }
   }, [selectedSource]);
 
-  const handleSourceChange = async (event) => {
+  const handleCategoryChange = async (event) => {
     const selectedSourceId = event.target.value;
     console.log(selectedSourceId, "232");
 
     // Update selected article category state
     setSelectedArticleCategory(selectedSourceId);
     console.log(storedArticles, "stored");
-    if (selectedSource == "newsAPI") {
+    if (selectedSource === "newsAPI") {
       const news = await getNewsFromApi(
         null,
         null,
@@ -100,7 +93,7 @@ const CategoriesDropDown = ({
         <select
           id="category"
           value={selectedArticleCategory}
-          onChange={handleSourceChange}
+          onChange={handleCategoryChange}
           className="block appearance-none w-full text-center bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
         >
           <option value="">Select a category</option>

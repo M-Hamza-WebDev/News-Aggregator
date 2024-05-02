@@ -9,6 +9,7 @@ import CategoriesDropDown from "./components/CategoriesDropDown";
 import DateFilter from "./components/DateFilter";
 
 function App() {
+  console.log(process.env.REACT_APP_API_URL, "process.env.API_URL");
   const [articles, setArticles] = useState([]);
   const [selectedarticleSource, setSelectedArticleSource] = useState("");
   const [selectedArticleCategory, setSelectedArticleCategory] = useState("");
@@ -32,24 +33,19 @@ function App() {
   const handleSearch = async (e) => {
     const searchQuery = e.target.value;
     setQuery(searchQuery);
-    if (storedArticles.length > 0 && searchQuery.length >= 3) {
+    if (storedArticles && searchQuery) {
       const filteredNews = storedArticles.filter((_article) => {
-        if (_article.title.toLowerCase().includes(searchQuery.toLowerCase()))
+        if (
+          _article?.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          _article?.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          _article?.source?.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
           return _article;
       });
       setArticles(filteredNews);
     } else {
       setArticles(storedArticles);
     }
-  };
-
-  const handleFilter = async (e) => {
-    const selectedFilter = e.target.value;
-    console.log({ selectedFilter });
-
-    const news = await getNewsFromApi(query, `sortBy=${selectedFilter}`);
-    setArticles(news);
-    setStoredArticles(news);
   };
 
   const handlePreferences = async (preference) => {
@@ -93,15 +89,15 @@ function App() {
             </svg>
           </div>
           <h1 className="sm:hidden block xl:text-3xl lg:text-3xl sm:text-2xl text-xl font-semibold text-center text-gray-800 uppercase tracking-wide ">
-              News Aggregator
-            </h1>
+            News Aggregator
+          </h1>
 
           <Preferences
             handlePreferences={handlePreferences}
             selectedSource={selectedSource}
             setSelectedSource={setSelectedSource}
           />
-          <SearchBar handleSearch={handleSearch} handleFilter={handleFilter} />
+          <SearchBar handleSearch={handleSearch} />
         </div>
 
         <div className="grid sm:grid-cols-3 sm:gap-4 gap-5 sm:mt-12 mt-5 mb-16">
@@ -111,6 +107,7 @@ function App() {
             storedArticles={storedArticles}
             selectedarticleSource={selectedarticleSource}
             setSelectedArticleSource={setSelectedArticleSource}
+            selectedArticleCategory={selectedArticleCategory}
             selectedSource={selectedSource}
           />
           <CategoriesDropDown
@@ -129,6 +126,7 @@ function App() {
             setStoredArticles={setStoredArticles}
             selectedArticleDate={selectedArticleDate}
             setSelectedArticleDate={setSelectedArticleDate}
+            selectedArticleCategory={selectedArticleCategory}
             selectedSource={selectedSource}
           />
         </div>

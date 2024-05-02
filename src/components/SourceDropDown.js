@@ -7,6 +7,7 @@ const SourceDropDown = ({
   storedArticles,
   selectedarticleSource,
   setSelectedArticleSource,
+  selectedArticleCategory,
   selectedSource,
 }) => {
   // State to hold original sources
@@ -14,7 +15,7 @@ const SourceDropDown = ({
   console.log(selectedSource, "selectedSource");
   useEffect(() => {
     // Fetch news articles from API
-    getNewsFromApi(null, null, selectedSource, null)
+    getNewsFromApi(null, null, selectedSource, null, selectedArticleCategory)
       .then((data) => {
         console.log(selectedSource, "111111111111111111");
 
@@ -31,7 +32,7 @@ const SourceDropDown = ({
       .catch((error) => {
         console.error("Error fetching news articles:", error);
       });
-  }, [selectedSource]);
+  }, [selectedSource, selectedArticleCategory]);
 
   const handleSourceChange = (event) => {
     const selectedSourceId = event.target.value;

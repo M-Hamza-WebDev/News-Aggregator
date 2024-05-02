@@ -1,3 +1,13 @@
+# Documention for running this project in Docker
+
+# Step 1 (Run the below command for build):
+docker build -t news-aggregator .
+
+# Step 2 (Run the below command for running the project)
+docker run -p 3000:3000 -t news-aggregator
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

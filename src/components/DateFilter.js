@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getNewsFromApi } from "../api/newsApi";
 
 const DateFilter = ({
-
   setArticles,
   storedArticles,
   selectedArticleDate,
   setSelectedArticleDate,
+  selectedArticleCategory,
   selectedSource,
 }) => {
   // State to hold original sources
@@ -14,7 +14,7 @@ const DateFilter = ({
   console.log(selectedSource, "selectedSource");
   useEffect(() => {
     // Fetch news articles from API
-    getNewsFromApi(null, null, selectedSource, null)
+    getNewsFromApi(null, null, selectedSource, null,selectedArticleCategory)
       .then((data) => {
         console.log(selectedSource, "111111111111111111");
 
@@ -31,9 +31,9 @@ const DateFilter = ({
       .catch((error) => {
         console.error("Error fetching news articles:", error);
       });
-  }, [selectedSource]);
+  }, [selectedSource,selectedArticleCategory]);
 
-  const handleSourceChange = (event) => {
+  const handleDateChange = (event) => {
     const selectedSourceId = event.target.value;
     console.log(selectedSourceId, "232");
 
@@ -71,7 +71,7 @@ const DateFilter = ({
         <select
           id="source"
           value={selectedArticleDate}
-          onChange={handleSourceChange}
+          onChange={handleDateChange}
           className="block appearance-none w-full text-center bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow-sm leading-tight focus:outline-none focus:shadow-outline"
         >
           <option value="">Select a source</option>
